@@ -201,4 +201,61 @@ public class MyBatisTest {
         //4.释放资源
         sqlSession.close();
     }
+
+    /*添加*/
+
+    @Test
+    public void testUpdate() throws IOException {
+
+        //接收参数
+        int status =50;
+        String companyName = "小米手机";
+        String brandName = "Mix10";
+        String description = "手机中的战斗机";
+        int ordered = 200;
+        int id = 52;
+
+
+
+        //封装对象（单条件）
+        Brand brand = new Brand();
+        brand.setStatus(status);
+        brand.setCompanyName(companyName);
+        brand.setBrandName(brandName);
+        brand.setDescription(description);
+        brand.setOrdered(ordered);
+        brand.setId(id);
+
+
+
+        //1.加载mybatis的核心配置文件，获取sqlSessionFactory
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //2.获取SqlSession对象，用它来执行sql
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        //开启自动提交事务，默认是开启事务（false），需要手动提交事务
+        //SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+
+        //3.获取UserMapper接口的代理对象
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        //4.执行方法
+        brandMapper.update(brand);
+
+        /*
+        主键返回
+        Integer id = brand.getId();
+        System.out.println(id);*/
+
+        //5.提交事务
+        sqlSession.commit();
+
+
+        //4.释放资源
+        sqlSession.close();
+    }
 }

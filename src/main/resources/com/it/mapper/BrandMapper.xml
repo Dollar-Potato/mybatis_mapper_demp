@@ -45,6 +45,7 @@
     </resultMap>
 
 
+
     <select id="selectAll" resultMap="brandResultMap">
         select * from  tb_brand;
     </select>
@@ -79,7 +80,7 @@
            <if test="companyName != null and companyName != '' ">
                and company_name like #{companyName}
            </if>
-           <if test="brandName != null and companyName != ''">
+           <if test="brandName != null and brandName != ''">
                and brand_name like #{brandName}
            </if>
        </where>
@@ -97,7 +98,7 @@
                 <when test="companyName != null and companyName != ''">
                     company_name like #{companyName}
                 </when>
-                <when test="brandName != null and companyName != ''">
+                <when test="brandName != null and brandName != ''">
                     brand_name like #{brandName}
                 </when>
             </choose>
@@ -109,7 +110,43 @@
     <!--主键返回-->
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
         insert into tb_brand(brand_name,company_name,ordered,description,status)
-        values (#{brandName},#{companyName},#{ordered},#{description},#{status})
+        values (#{brandName},#{companyName},#{ordered},#{description},#{status});
     </insert>
+
+
+    <!--修改动态字段-->
+    <update id="update">
+        update tb_brand
+        <set>
+            <if test="brandName != null and brandName != ''">
+                brand_name = #{brandName},
+            </if>
+            <if test="companyName != null and companyName != ''">
+                company_name = #{companyName},
+            </if>
+            <if test="companyName != null ">
+                ordered = #{ordered},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="status != null ">
+                status = #{status}
+            </if>
+        </set>
+
+        where id = #{id};
+    </update>
+    <!--修改-->
+    <!--<update id="update">
+        update tb_brand
+        set
+            brand_name = #{brandName},
+            company_name = #{companyName},
+            ordered = #{ordered},
+            description = #{description},
+            status = #{status}
+        where id = #{id};
+    </update>-->
 
 </mapper>
