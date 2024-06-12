@@ -67,7 +67,7 @@
             and brand_name like #{brandName}
     </select>-->
 
-    <!--动态条件查询-->
+    <!--多条件的动态条件查询-->
     <select id="selectByCondition" resultMap="brandResultMap">
         select *
         from tb_brand
@@ -82,8 +82,25 @@
                and brand_name like #{brandName}
            </if>
        </where>
+    </select>
 
 
+    <select id="selectByConditionSingle" resultMap="brandResultMap">
+        select *
+        from tb_brand
+        <where>
+            <choose>  <!--相当于switch-->
+                <when test="status != null"> <!--相当于case-->
+                    status = #{status}
+                </when>
+                <when test="companyName != null and companyName != ''">
+                    company_name like #{companyName}
+                </when>
+                <when test="brandName != null and companyName != ''">
+                    brand_name like #{brandName}
+                </when>
+            </choose>
+        </where>
 
     </select>
 

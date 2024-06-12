@@ -36,4 +36,6 @@ public interface BrandMapper {
     3.map集合参数
     */
     List<Brand> selectByCondition(Map map);
+
+    List<Brand> selectByConditionSingle(Brand brand);
 }
