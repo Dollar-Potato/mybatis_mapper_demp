@@ -56,9 +56,9 @@
             2.${} : 拼sql。会存在SQL注入问题
     -->
     <!--根据id查询-->
-    <select id="selectById" resultMap="brandResultMap">
+    <!--<select id="selectById" resultMap="brandResultMap">
         select * from tb_brand where id=#{id};
-    </select>
+    </select>-->
 
     <!--多条件查询-->
     <!--<select id="selectByCondition" resultMap="brandResultMap">

@@ -2,6 +2,7 @@ package com.it.mapper;
 
 import com.it.pojo.Brand;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ public interface BrandMapper {
     List<Brand> selectAll();
 
     //根据id查询
+    //@Select("select * from tb_brand where id = #{id}")
     Brand selectById(int id);
 
     /*
