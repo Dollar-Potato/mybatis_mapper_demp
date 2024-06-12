@@ -53,7 +53,19 @@
             1.#{} :会将其替换为?,为了防止SQL注入
             2.${} : 拼sql。会存在SQL注入问题
     -->
+    <!--根据id查询-->
     <select id="selectById" resultMap="brandResultMap">
         select * from tb_brand where id=#{id};
     </select>
+
+    <!--多条件查询-->
+    <select id="selectByCondition" resultMap="brandResultMap">
+        select *
+        from tb_brand
+        where status = #{status}
+            and company_name like #{companyName}
+            and brand_name like #{brandName}
+    </select>
+
+
 </mapper>
