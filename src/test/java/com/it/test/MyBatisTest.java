@@ -189,6 +189,11 @@ public class MyBatisTest {
         //4.执行方法
         brandMapper.add(brand);
 
+        /*
+        主键返回
+        Integer id = brand.getId();
+        System.out.println(id);*/
+
         //5.提交事务
         sqlSession.commit();
 

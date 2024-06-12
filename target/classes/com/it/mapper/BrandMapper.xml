@@ -106,7 +106,8 @@
     </select>
 
     <!--添加-->
-    <insert id="add">
+    <!--主键返回-->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
         insert into tb_brand(brand_name,company_name,ordered,description,status)
         values (#{brandName},#{companyName},#{ordered},#{description},#{status})
     </insert>
