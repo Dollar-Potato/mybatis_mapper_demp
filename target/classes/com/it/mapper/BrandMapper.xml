@@ -7,8 +7,39 @@
 -->
 
 <mapper namespace="com.it.mapper.BrandMapper">
+    <!--
+        数据库表的字段名称（如:company_name） 和实体类的属性名称（如:companyName） 不一样，则不能自动封装
+        解决方法：
+                1.起别名，让别名和实体类的属性名一样
+                2.
+    -->
 
-    <select id="selectAll" resultType="com.it.pojo.Brand">
+    <!--
+    方法1:起别名
+        缺点：每次查询都要定义依次别名
+            解决办法：使用sql片段
+                缺点：不灵活
+    方法2：resultMap:
+    -->
+    <!--<select id="selectAll" resultType="brand">
+        select id,brand_name as brandName,company_name as companyName,ordered,description,status
+        from  tb_brand;
+    </select>-->
+
+    <resultMap id="brandResultMap" type="brand">
+        <result column="brand_name" property="brandName"/>
+        <result column="company_name" property="companyName"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="brandResultMap">
         select * from  tb_brand;
+    </select>
+
+
+
+
+
+    <select id="selectById" resultType="brand">
+        select tb_brand where id
     </select>
 </mapper>

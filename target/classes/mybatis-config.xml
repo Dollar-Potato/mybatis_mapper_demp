@@ -5,9 +5,9 @@
 <configuration>
 
     <!--类型别名,设置后不区分大小写-->
-    <!--<typeAliases>
+    <typeAliases>
         <package name="com.it.pojo"/>
-    </typeAliases>-->
+    </typeAliases>
 
     <environments default="development">
         <!--
