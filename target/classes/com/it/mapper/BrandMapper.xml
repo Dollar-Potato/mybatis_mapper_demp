@@ -149,4 +149,9 @@
         where id = #{id};
     </update>-->
 
+    <!--根据id删除-->
+    <delete id="deleteById">
+        delete from tb_brand where id = #{id};
+    </delete>
+
 </mapper>
