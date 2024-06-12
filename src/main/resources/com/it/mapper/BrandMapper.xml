@@ -48,11 +48,12 @@
         select * from  tb_brand;
     </select>
 
-
-
-
-
-    <select id="selectById" resultType="brand">
-        select tb_brand where id
+    <!--
+        参数占位符：
+            1.#{} :会将其替换为?,为了防止SQL注入
+            2.${} : 拼sql。会存在SQL注入问题
+    -->
+    <select id="selectById" resultMap="brandResultMap">
+        select * from tb_brand where id=#{id};
     </select>
 </mapper>
