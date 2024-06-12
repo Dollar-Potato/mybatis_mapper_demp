@@ -48,4 +48,8 @@ public interface BrandMapper {
 
     //根据id删除
     void deleteById(int id);
+
+    //批量删除
+    //@Param改变key的名称，默认是array
+    void deleteByIds(@Param("ids") int[] ids);
 }

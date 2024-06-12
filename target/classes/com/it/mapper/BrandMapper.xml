@@ -154,4 +154,19 @@
         delete from tb_brand where id = #{id};
     </delete>
 
+    <!--批量删除-->
+    <!--
+        mybatis会将数组参数，封装为一个Map集合
+        默认： array = 数组
+        使用@Param注解改变map集合的默认key的名称
+    -->
+    <delete id="deleteByIds">
+        delete from tb_brand where id
+        in
+            <foreach collection="ids" item="id" separator="," open="(" close=")">
+                #{id}
+            </foreach>
+            ;
+    </delete>
+
 </mapper>

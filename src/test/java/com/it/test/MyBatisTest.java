@@ -259,7 +259,7 @@ public class MyBatisTest {
         sqlSession.close();
     }
 
-    /*添加*/
+    /*根据id删除一条数据*/
 
     @Test
     public void testDeleteById() throws IOException {
@@ -284,6 +284,45 @@ public class MyBatisTest {
 
         //4.执行方法
         brandMapper.deleteById(id);
+
+        /*
+        主键返回
+        Integer id = brand.getId();
+        System.out.println(id);*/
+
+        //5.提交事务
+        sqlSession.commit();
+
+
+        //4.释放资源
+        sqlSession.close();
+    }
+
+    /*批量删除数据*/
+
+    @Test
+    public void testDeleteByIds() throws IOException {
+
+        //接收参数
+        int[] ids = {51,53};
+
+        //1.加载mybatis的核心配置文件，获取sqlSessionFactory
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        //2.获取SqlSession对象，用它来执行sql
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        //开启自动提交事务，默认是开启事务（false），需要手动提交事务
+        //SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+
+        //3.获取UserMapper接口的代理对象
+        BrandMapper brandMapper = sqlSession.getMapper(BrandMapper.class);
+
+        //4.执行方法
+        brandMapper.deleteByIds(ids);
 
         /*
         主键返回
